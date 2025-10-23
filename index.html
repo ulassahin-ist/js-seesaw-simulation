@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+  <head>
+    <meta charset="utf-8" />
+    <title>Seesaw App</title>
+    <link rel="icon" href="favicon-32x32.png" type="image/x-icon" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1 , maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+  </head>
+  <body>
+    <section class="container">
+      <!-- Display Counters -->
+      <div class="counters">
+        <div class="counter">
+          <div class="title">LEFT WEIGHT</div>
+          <div class="value" id="counter_leftWeight">0 kg</div>
+        </div>
+        <div class="counter">
+          <div class="title">NEXT WEIGHT</div>
+          <div class="value" id="counter_weight">0</div>
+        </div>
+        <div class="counter">
+          <div class="title">TILT ANGLE</div>
+          <div class="value" id="counter_angle">0°</div>
+        </div>
+        <div class="counter">
+          <div class="title">RIGHT WEIGHT</div>
+          <div class="value" id="counter_rightWeight">0 kg</div>
+        </div>
+      </div>
+      <!-- The Frame and Dynamic Elements -->
+      <div class="static-frame">
+        <label for="static-frame" id="label_distance"></label>
+        <div class="loader" id="loader">
+          <div class="spinner"></div>
+        </div>
+        <div class="dynamic-frame" onclick="initSequence(event)">
+          <div class="aimLine"><div class="ball ghost-ball"></div></div>
+          <div class="plank"></div>
+          <div class="pivot"></div>
+        </div>
+      </div>
+      <!-- Controls  -->
+      <div class="controls">
+        <button id="b_reset" onclick="handleReset()">Reset</button>
+        <button id="button_pause" onclick="handlePause()">Pause</button>
+        <button id="button_auto" onclick="handleAuto()">Auto</button>
+        <div class="dropdown">
+          <select
+            name="colors"
+            id="dropdown_colors"
+            onchange="handleColorSet(this.value)"
+          >
+            <option value="Vibrant">Vibrant</option>
+            <option value="Sunrise">Sunrise</option>
+            <option value="Pastel">Pastel</option>
+            <option value="Raindrops">Raindrops</option>
+            <option value="Delight">Delight</option>
+          </select>
+          <div class="arrow"></div>
+        </div>
+      </div>
+      <!-- Logs Section -->
+      <div class="logs"></div>
+    </section>
+    <!-- Audio Elements -->
+    <audio id="audio_select" src="audio/select.mp3"></audio>
+    <audio id="audio_reset" src="audio/reset.mp3"></audio>
+    <audio id="audio_auto" src="audio/auto.mp3" loop></audio>
+    <audio id="audio_fall" src="audio/fall.mp3"></audio>
+
+    <script src="js/index.js"></script>
+  </body>
+</html>

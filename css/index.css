@@ -1,0 +1,344 @@
+:root {
+  --text: #495057;
+  --text1: #6c757d;
+  --text2: #2c3e50;
+  --bg: #f5f7fa;
+  --white: #ffffff;
+  --white1: #f8f9fa;
+  --white2: #f2f2f2;
+  --pg-bg: #ecf0f1;
+  --pg-gr: #95a5a6;
+  --pg-pl: #663100;
+  --pg-pi: #2f2f2f;
+
+  --lightgreen: #c6ffc8;
+  --lightred: #ffa1a1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  color: var(--text);
+}
+
+html {
+  font-size: 10px;
+}
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 1.6rem;
+  background-color: var(--bg);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+button,
+a {
+  color: var(--text);
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.container {
+  width: 640px;
+  padding: 20px;
+  margin: 40px auto;
+  background: var(--white);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.203);
+  box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.9),
+    5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+/* ------------------------------------------------------------------------------------------------------------ */
+.counters {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.counter {
+  width: 20%;
+  height: 80px;
+  background: var(--white1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.8);
+  /* box-shadow: -3px -3px 6px rgba(255, 255, 255, 0.8),
+    3px 3px 6px rgba(0, 0, 0, 0.1); */
+  border: 1px solid rgba(0, 0, 0, 0.184);
+  border-radius: 10px;
+}
+.counter .title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+  color: var(--text1);
+}
+.counter .value {
+  font-size: 2rem;
+  color: var(--text2);
+}
+
+/* ------------------------------------------------------------------------------------------------------------ */
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  transition: opacity 0.3s ease;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--accent, #4b9fff);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+/* ------------------------------------------------------------------------------------------------------------ */
+
+.static-frame {
+  content: "";
+  width: 600px;
+  height: 500px;
+  background: var(--pg-bg);
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.184);
+}
+.static-frame::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-bottom: 45px solid var(--pg-gr);
+}
+.static-frame label {
+  display: none;
+  position: absolute;
+  text-align: center;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.dynamic-frame {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 400px;
+  height: 500px;
+  transition: all 0.5s ease;
+  transform: translateX(-50%);
+  transform-origin: center;
+}
+
+.plank {
+  position: absolute;
+  bottom: 200px;
+  left: 50%;
+  width: 400px;
+  height: 20px;
+  background: var(--pg-pl);
+  transition: all 0.5s ease;
+  transform: translateX(-50%) rotate(var(--angle, 0deg));
+  transform-origin: center;
+  --angle: 0deg;
+}
+.pivot {
+  position: absolute;
+  bottom: 190px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  width: 30px;
+  aspect-ratio: 1 / 1;
+  background: var(--pg-pi);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+.ball {
+  position: absolute;
+  border-radius: 50%;
+  transition: top 0.5s cubic-bezier(0.3, 0.8, 0.4, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.184);
+}
+.ball .title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: white;
+}
+.aimLine {
+  position: absolute;
+  top: 80px;
+  width: 2px;
+  height: 40%;
+  display: none;
+  pointer-events: none;
+  transform: translateX(0);
+  transition: transform 0s;
+  /* Gradient for a sleek laser effect */
+  background: linear-gradient(
+    to bottom,
+    rgba(170, 4, 4, 0.436) 0%,
+    rgba(74, 0, 0, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  border-radius: 2px;
+
+  border-radius: 2px; /* rounded edges */
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* subtle glow */
+}
+.ghost-ball {
+  top: calc(-1 * var(--size) - 5px);
+  transform: translateX(-50%);
+  opacity: 0.2;
+  pointer-events: none;
+  transition: left 0.05s ease;
+  --size: 25px;
+}
+/* ------------------------------------------------------------------------------------------------------------ */
+.controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.controls button {
+  width: 100px;
+  height: 40px;
+  background: var(--white1);
+  border: none;
+  border-radius: 10px;
+  box-shadow: -3px -3px 6px rgba(255, 255, 255, 0.8),
+    3px 3px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.controls button:first-child {
+  background: var(--lightred);
+}
+.controls button:hover {
+  box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.8),
+    1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+.controls button:active {
+  background: var(--white2);
+}
+
+.controls select {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--white1);
+  border: none;
+  border-radius: 10px;
+  box-shadow: -3px -3px 6px rgba(255, 255, 255, 0.8),
+    3px 3px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--text2);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 25px;
+}
+
+.controls select:hover,
+.controls select:focus {
+  outline: none;
+  box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.8),
+    1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+.controls .dropdown {
+  position: relative;
+  width: 100px;
+  height: 40px;
+}
+.controls .dropdown .arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--text1);
+  border-bottom: 2px solid var(--text1);
+  transform: translateY(-50%) rotate(45deg);
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------------------------------------------------ */
+
+.logs {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  overflow-y: auto;
+  background: var(--white2);
+  padding: 7px 7px;
+  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.1),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  scroll-behavior: smooth;
+}
+.log {
+  width: 100%;
+  padding: 5px 7px;
+  background: var(--white);
+  margin-bottom: 2px;
+  border-radius: 10px;
+  box-shadow: -3px -3px 6px rgba(255, 255, 255, 0.8),
+    3px 3px 6px rgba(0, 0, 0, 0.1);
+  transition: background 0.5s ease;
+  color: var(--text);
+}
+
+.log.active {
+  background: var(--lightgreen);
+}
