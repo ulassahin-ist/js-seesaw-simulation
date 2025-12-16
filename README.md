@@ -1,3 +1,6 @@
+[![Live Demo](https://img.shields.io/badge/demo-live-yellow)](https://ulassahin-ist.github.io/js-seesaw-simulation/)
+[![GitHub](https://img.shields.io/badge/github-repository-blue)](https://github.com/ulassahin-ist/js-seesaw-simulation)
+
 # 🎢 Seesaw App
 
 A small interactive physics-based seesaw simulation built with **HTML**, **CSS**, and **JavaScript**.  
